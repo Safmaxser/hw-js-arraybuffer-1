@@ -5,8 +5,9 @@ export default class Otherworldly {
     this.health = 100;  
     this.defaultAttack = attack;  
     this.defence = defence;
-    this.attack = {}; 
+    this.distance = 1; 
   } 
+
   get stoned() {
     return this._stoned;
   }
@@ -16,17 +17,28 @@ export default class Otherworldly {
     }
     this._stoned = value; 
   }
-  get attack() {
-    return this._attack;
+  get distance() {
+    return this._distance;
   }
-  set attack(parameters) {
-    const distance = parameters['distance'];
-    if (!distance || distance < 1 ||distance > 5) {
-      this._attack = 0;
-      return;
+  set distance(value) {
+    if (!value || value <= 0) {
+      throw new Error('Некорректное значение - distance');
     }
-    const powerLoss = this.defaultAttack  * (distance - 1) * 10 / 100;
-    const stonedEffect = this.stoned ? Math.log2(distance) * 5 : 0
-    this._attack = Math.round(this.defaultAttack - powerLoss - stonedEffect);
+    this._distance = value; 
+  }
+
+  get attack() {
+    if (this.distance < 1 || this.distance > 5) {
+      return this._attack = 0;
+    }
+    const powerLoss = this.defaultAttack  * (this.distance - 1) * 10 / 100;
+    const stonedEffect = this.stoned ? Math.log2(this.distance) * 5 : 0
+    return Math.round(this.defaultAttack - powerLoss - stonedEffect);
+  }
+  set attack(value) {
+    if (!value || value <= 0) {
+      throw new Error('Некорректное значение - attack');
+    }
+    this.defaultAttack = value;
   }
 }

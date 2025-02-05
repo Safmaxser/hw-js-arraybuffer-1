@@ -7,8 +7,8 @@ test('testing the Daemon class for correct data when instantiating', () => {
     type: 'Daemon',
     health: 100,
     defaultAttack: 10,
-    _attack: 0,
     defence: 40,
+    _distance: 1,
   };
   expect(result).toEqual(expected);
 });

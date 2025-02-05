@@ -7,8 +7,8 @@ test('testing the Magician class for correct data when instantiating', () => {
     type: 'Magician',
     health: 100,   
     defaultAttack: 100,
-    _attack: 0,
     defence: 40,
+    _distance: 1,
   };
   expect(result).toEqual(expected);
 });
